@@ -2,6 +2,7 @@
  * stegodeno/mod.ts
  */
 
-export { DenoLog } from "./src/DenoLog.ts";
-export { DenoCmd } from "./src/DenoCmd.ts";
-export { DenoGit } from "./src/DenoGit.ts";
+export { StegodenoLog } from "./src/StegodenoLog.ts";
+export { StegodenoCmd } from "./src/StegodenoCmd.ts";
+export { StegodenoGit } from "./src/StegodenoGit.ts";
+export { StegodenoGitRecipe } from "./src/StegodenoGitRecipe.ts";

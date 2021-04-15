@@ -1,7 +1,7 @@
 /**
- * stegodeno/src/DenoGit.ts
+ * stegodeno/src/StegodenoGit.ts
  */
-import { DenoCmd, DenoCmdResult } from "./DenoCmd.ts";
+import { StegodenoCmd, StegodenoCmdResult } from "./StegodenoCmd.ts";
 
 /**
  * General Console output features
@@ -9,19 +9,19 @@ import { DenoCmd, DenoCmdResult } from "./DenoCmd.ts";
  * @class
  * @classdesc General Console output features
  */
-export class DenoGit {
-  private cmd: DenoCmd;
+export class StegodenoGit {
+  private cmd: StegodenoCmd;
 
   constructor() {
-    this.cmd = DenoCmd.InitConsole();
+    this.cmd = StegodenoCmd.InitConsole();
   }
 
-  public static InitConsole(): DenoGit {
-    var git = new DenoGit();
+  public static InitConsole(): StegodenoGit {
+    var git = new StegodenoGit();
     return git;
   }
 
-  async git(command: Array<string>, out = true): Promise<DenoCmdResult> {
+  async git(command: Array<string>, out = true): Promise<StegodenoCmdResult> {
     command.unshift("git");
     return await this.cmd.run(command, out);
   }
@@ -30,7 +30,7 @@ export class DenoGit {
     this.git(command, out);
   }
 
-  async status(out = true): Promise<DenoCmdResult> {
+  async status(out = true): Promise<StegodenoCmdResult> {
     return await this.git([
       "status",
     ], out);
@@ -40,33 +40,33 @@ export class DenoGit {
     this.status(out);
   }
 
-  async fetch(out = true): Promise<DenoCmdResult> {
+  async fetch(flags = "pv", out = true): Promise<StegodenoCmdResult> {
     return await this.git([
       "fetch",
-      "-pv",
+      `-${flags}`,
     ], out);
   }
 
-  fetchSync(out = true): void {
-    this.fetch(out);
+  fetchSync(flags = "pv", out = true): void {
+    this.fetch(flags, out);
   }
 
-  async checkout(branch: string, out = true): Promise<DenoCmdResult> {
+  async checkout(branch = "master", out = true): Promise<StegodenoCmdResult> {
     return await this.git([
       "checkout",
       branch,
     ], out);
   }
 
-  checkoutSync(branch: string, out = true): void {
+  checkoutSync(branch = "master", out = true): void {
     this.checkout(branch, out);
   }
 
   async pull(
-    branch: string,
+    branch = "master",
     remote = "origin",
     out = true,
-  ): Promise<DenoCmdResult> {
+  ): Promise<StegodenoCmdResult> {
     return await this.git([
       "pull",
       remote,
@@ -75,7 +75,7 @@ export class DenoGit {
   }
 
   pullSync(
-    branch: string,
+    branch = "master",
     remote = "origin",
     out = true,
   ): void {
@@ -86,7 +86,7 @@ export class DenoGit {
     repositoryUrl: string,
     remote = "origin",
     out = true,
-  ): Promise<DenoCmdResult> {
+  ): Promise<StegodenoCmdResult> {
     return await this.git([
       "remote",
       "add",
@@ -103,7 +103,7 @@ export class DenoGit {
     this.remoteAdd(repositoryUrl, remote, out);
   }
 
-  async init(out = true): Promise<DenoCmdResult> {
+  async init(out = true): Promise<StegodenoCmdResult> {
     return await this.git([
       "init",
     ], out);

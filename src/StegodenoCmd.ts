@@ -1,10 +1,10 @@
 /**
- * stegodeno/src/DenoCmd.ts
+ * stegodeno/src/StegodenoCmd.ts
  */
 import { exec } from "./../deps.ts";
-import { DenoLog } from "./DenoLog.ts";
+import { StegodenoLog } from "./StegodenoLog.ts";
 
-export interface DenoCmdResult {
+export interface StegodenoCmdResult {
   output: string;
   result: boolean;
   code: number;
@@ -16,7 +16,7 @@ export interface DenoCmdResult {
  * @class
  * @classdesc General Console output features
  */
-export class DenoCmd {
+export class StegodenoCmd {
   private static ENVS = {
     LC_ALL: "en_gb",
   };
@@ -26,10 +26,10 @@ export class DenoCmd {
   /**
    * Class initializer
    * 
-   * @returns DenoCmd
+   * @returns StegodenoCmd
    */
-  public static InitConsole(): DenoCmd {
-    var cmd = new DenoCmd();
+  public static InitConsole(): StegodenoCmd {
+    var cmd = new StegodenoCmd();
     return cmd;
   }
 
@@ -38,27 +38,27 @@ export class DenoCmd {
    * @param cwd string
    * @returns 
    */
-  setCwd(cwd: string): DenoCmd {
+  setCwd(cwd: string): StegodenoCmd {
     this.cwd = cwd;
     return this;
   }
 
-  async run(cmd: Array<string>, out = true): Promise<DenoCmdResult> {
+  async run(cmd: Array<string>, out = true): Promise<StegodenoCmdResult> {
     return await exec({
       cmd: cmd,
       cwd: this.cwd,
-      env: DenoCmd.ENVS,
+      env: StegodenoCmd.ENVS,
     }).then(function (e) {
       if (out) {
-        DenoLog.LS(e);
+        StegodenoLog.LS(e);
       }
-      var result: DenoCmdResult = { output: e, result: true, code: 0 };
+      var result: StegodenoCmdResult = { output: e, result: true, code: 0 };
       return result;
     }).catch(function (e) {
       if (out) {
-        DenoLog.LE(e.message);
+        StegodenoLog.LE(e.message);
       }
-      var result: DenoCmdResult = {
+      var result: StegodenoCmdResult = {
         output: e.message,
         result: false,
         code: e.code,
