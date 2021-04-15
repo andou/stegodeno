@@ -1,7 +1,7 @@
 /**
  * stegodeno/src/StegodenoLog.ts
  */
-import { figlet, text } from "./../deps.ts";
+import { text } from "./../deps.ts";
 
 /**
  * General Console output features

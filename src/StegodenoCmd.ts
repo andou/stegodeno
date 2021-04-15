@@ -1,8 +1,8 @@
 /**
  * stegodeno/src/StegodenoCmd.ts
  */
-import { exec } from "./../deps.ts";
 import { StegodenoLog } from "./StegodenoLog.ts";
+import { exec } from "./../deps.ts";
 
 export interface StegodenoCmdResult {
   output: string;
@@ -54,14 +54,14 @@ export class StegodenoCmd {
       }
       var result: StegodenoCmdResult = { output: e, result: true, code: 0 };
       return result;
-    }).catch(function (e) {
+    }).catch(function (e: Error) {
       if (out) {
         StegodenoLog.LE(e.message);
       }
       var result: StegodenoCmdResult = {
         output: e.message,
         result: false,
-        code: e.code,
+        code: 1,
       };
       return result;
     });
